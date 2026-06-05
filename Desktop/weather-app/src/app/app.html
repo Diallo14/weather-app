@@ -1,0 +1,61 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center" 
+     style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)">
+  
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        
+        <div class="text-center mb-4">
+          <h1 class="text-white fw-bold display-5">🌤️ Météo App</h1>
+          <p class="text-white-50">Recherche la météo de n'importe quelle ville</p>
+        </div>
+
+        <div class="input-group mb-4">
+          <input 
+            type="text" 
+            class="form-control form-control-lg" 
+            placeholder="Ex: Conakry, Paris, London..."
+            [(ngModel)]="city"
+            (keyup.enter)="getWeather()">
+          <button class="btn btn-warning fw-bold px-4" (click)="getWeather()">
+            Rechercher
+          </button>
+        </div>
+
+        <div *ngIf="loading" class="text-center text-white">
+          <div class="spinner-border text-warning" role="status"></div>
+          <p class="mt-2">Chargement...</p>
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger text-center">
+          {{ error }}
+        </div>
+
+        <div *ngIf="weather" class="card bg-white bg-opacity-10 border-0 text-white rounded-4 p-4">
+          <div class="text-center">
+            <h2 class="fw-bold">{{ weather.name }}, {{ weather.sys.country }}</h2>
+            <img [src]="'https://openweathermap.org/img/wn/' + weather.weather[0].icon + '@2x.png'" alt="météo">
+            <h1 class="display-3 fw-bold text-warning">{{ weather.main.temp | number:'1.0-0' }}°C</h1>
+            <p class="fs-5 text-capitalize">{{ weather.weather[0].description }}</p>
+          </div>
+          <hr class="border-white">
+          <div class="row text-center">
+            <div class="col-4">
+              <p class="mb-0 text-white-50">Ressenti</p>
+              <p class="fw-bold">{{ weather.main.feels_like | number:'1.0-0' }}°C</p>
+            </div>
+            <div class="col-4">
+              <p class="mb-0 text-white-50">Humidité</p>
+              <p class="fw-bold">{{ weather.main.humidity }}%</p>
+            </div>
+            <div class="col-4">
+              <p class="mb-0 text-white-50">Vent</p>
+              <p class="fw-bold">{{ weather.wind.speed }} m/s</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
