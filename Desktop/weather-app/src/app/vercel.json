@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm install -g @angular/cli && ng build",
+  "buildCommand": "npx @angular/cli build",
   "outputDirectory": "dist/weather-app/browser",
   "framework": null
 }
